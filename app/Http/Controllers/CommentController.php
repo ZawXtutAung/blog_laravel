@@ -8,30 +8,29 @@ use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
-    public function create(){
-        $comment=new Comment;
-        $comment->comment =request()->contents;
-        $comment->article_id =request()->article_id;
-        $comment->user_id=auth()->user()->id;
-        $comment->save();
-        return back()->with('info','A Comment Added');;
-    }
-    public function delete($id)
+    public function create(Request $request)
     {
-        $comment=Comment::find($id);
+        Comment::create([
+            'content'    => $request->content,
+            'article_id' => $request->article_id,
+            'user_id'    => auth()->user()->id
+        ]);
+
+        return back()->with('info','A Comment Added');
+    }
+    public function delete(Comment $comment)
+    {
 //        if($comment->user_id==auth()->user()->id){
         if (Gate::allows('comment-delete',$comment)){
             $comment->delete();
-            return back();
-
-        }else{
+            return back()->with('info','A Comment Deleted');
+        } else {
             return back()->with('error','Unauthorize');
         }
 
-
-        return back()->with('info','A Comment Deleted');
     }
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 }
