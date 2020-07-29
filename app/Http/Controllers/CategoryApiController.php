@@ -70,4 +70,3 @@ class CategoryApiController extends Controller
         return $category;
     }
 }
-//http://192.168.43.223/

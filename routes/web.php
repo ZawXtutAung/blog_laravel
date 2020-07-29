@@ -31,15 +31,15 @@ Route::get('/','ArticleController@index');
 Route::get('/articles/add','ArticleController@add');
 
 Route::post('/articles/add','ArticleController@create');
-Route::get('/articles/delete/{id}','ArticleController@delete');
+Route::get('/articles/delete/{article}','ArticleController@delete');
 
 Route::post('/comments/add','CommentController@create');
-Route::get('/comments/delete/{id}','CommentController@delete');
+Route::get('/comments/delete/{comment}','CommentController@delete');
 
 
 
 Route::get('/articles','ArticleController@index');
 
-Route::get('/articles/detail/{id}','ArticleController@detail');
+Route::get('/articles/detail/{article}','ArticleController@detail');
 Auth::routes();
 Route::get('/home', 'HomeController@index');
