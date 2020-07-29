@@ -21,7 +21,7 @@
             @foreach($article->comments as $comment)
                 <li class="list-group-item">
                     {{$comment->content }}
-                    <a href="{{url("$/comment/delete/$comment->id")}}" class="close">
+                    <a href="{{ url("/comments/delete/$comment->id") }}" class="close">
                         &times;
                     </a>
                     <div class="small mt-2">
